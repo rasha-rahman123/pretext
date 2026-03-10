@@ -36,7 +36,7 @@ Current bundle:
   - Language: Hebrew
   - Source: `מסעות בנימין מטודלה`
   - URL: <https://he.wikisource.org/wiki/%D7%9E%D7%A1%D7%A2%D7%95%D7%AA_%D7%91%D7%A0%D7%99%D7%9E%D7%99%D7%9F_%D7%9E%D7%98%D7%95%D7%93%D7%9C%D7%94>
-  - Acquisition: Wikisource `parse` API, with edit-warning scaffolding removed
+  - Acquisition: Wikisource `parse` API, trimmed to the fully transcribed portion with editorial bracket notes removed
 
 Machine-readable metadata lives in `sources.json`.
 

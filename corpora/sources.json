@@ -84,9 +84,9 @@
     "default_width": 600,
     "min_width": 300,
     "max_width": 900,
-    "characters": 25833,
-    "lines": 220,
+    "characters": 20748,
+    "lines": 171,
     "acquired_via": "parse",
-    "notes": "Hebrew travelogue stress corpus from Wikisource, with edit-warning scaffolding removed."
+    "notes": "Hebrew travelogue stress corpus from Wikisource, trimmed to the fully transcribed portion with editorial bracket notes removed."
   }
 ]
