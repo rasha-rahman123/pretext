@@ -30,6 +30,7 @@ Internal notes for contributors and agents. Use `README.md` as the public source
 - `pages/benchmark.ts` — performance comparisons
 - `pages/bubbles.ts` — bubble shrinkwrap demo
 - `pages/demo.ts` — manual line-placement demo built on `layoutWithLines()`
+- `pages/columns.ts` — three-column userland reflow demo built from one `layoutWithLines()` result
 
 ### Implementation notes
 
@@ -81,7 +82,7 @@ Internal notes for contributors and agents. Use `README.md` as the public source
 - URL-like runs such as `https://...` / `www...` are currently modeled as two breakable preprocessing units when a query exists: the path through the query introducer (`?`), then the query string. This is intentionally narrow and exists to stop obviously bad mid-path URL breaks without forcing the whole query string to fragment character-by-character.
 - Mixed app text also pulled in two more keep-worthy preprocessing rules: contextual escaped quote clusters like `\"word\"`, and numeric/time-range runs like `२४×७` / `7:00-9:00`.
 - For Southeast Asian scripts or mixed text containing Thai/Lao/Khmer/Myanmar, trust the `Range`-based corpus diagnostics over span-probing; span units can perturb line breaking there.
-- That rule now has one explicit caveat: the remaining mixed-app `710px` soft-hyphen miss is extractor-sensitive. Compare `--method=span` and `--method=range` before changing the engine, and do not assume either extractor is the whole truth by itself.
+- That rule now has one explicit caveat: the remaining mixed-app `710px` soft-hyphen miss is extractor-sensitive **and** not cleanly local. Both extractors agree the full-corpus miss is real, but isolated paragraph/slice probes go exact in height. Treat that width as paragraph-scale / accumulation-sensitive until a cleaner reproducer appears, and do not patch the engine from only one extractor view.
 - A second Thai prose corpus (`นิทานเวตาล เรื่องที่ ๗`) is now checked in and exact at Chrome/Safari anchor widths plus a 9-sample Chrome sweep. Treat current Thai support as broader than one lucky story, but still verify new Thai text before declaring the whole script “done.”
 - Khmer anchor widths were exact in both Chrome and Safari, and a 9-sample Chrome sweep was exact. The full `step=10` sweep was slow enough to be annoying, so use `--samples=<n>` first unless you specifically need every width.
 - Japanese `羅生門` is now a checked-in canary. The first keep-worthy Japanese rule was semantic, not font-specific: kana iteration marks like `ゝ` / `ゞ` / `ヽ` / `ヾ` should be treated as CJK line-start-prohibited, even when `Intl.Segmenter` emits them as standalone word-like pieces.

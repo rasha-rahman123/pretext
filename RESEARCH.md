@@ -769,8 +769,11 @@ Current diagnostic read on the remaining `710px` mixed miss:
 - the overall coarse sweep is still `60/61 exact`
 - `--method=range` and `--method=span` both point at the same soft-hyphen line, but disagree on
   exactly how much of `trans­atlantic` the browser kept
-- that means the canary is still real, but the extractor is now part of the uncertainty; do not
-  overfit the engine based on only one of those two views
+- the same paragraph and a normalized corpus slice both go exact in total height when isolated under
+  the real mixed-app font, even though they still expose a local break mismatch
+- that means the canary is still real, but the remaining miss currently looks paragraph-scale or
+  accumulation-sensitive, not like a clean local SHY bug
+- do not overfit the engine based on only one extractor view or one isolated paragraph repro
 
 ## Thai corpus note
 

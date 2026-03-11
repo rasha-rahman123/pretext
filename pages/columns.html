@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Pretext — Columns</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+  :root {
+    --paper: #f4efe5;
+    --ink: #1f1610;
+    --muted: #6e6050;
+    --accent: #974f29;
+    --grid: rgba(38, 25, 16, 0.08);
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    min-height: 100vh;
+    color: var(--ink);
+    background:
+      radial-gradient(circle at top, rgba(202, 155, 90, 0.14), transparent 30%),
+      linear-gradient(180deg, #f7f2ea, #eadfce);
+    font-family: "Iowan Old Style", "Palatino Linotype", "Book Antiqua", Palatino, serif;
+  }
+
+  main {
+    width: min(1360px, calc(100vw - 32px));
+    margin: 0 auto;
+    padding: 28px 0 40px;
+  }
+
+  .hero {
+    display: grid;
+    grid-template-columns: 1.2fr 0.8fr;
+    gap: 18px;
+    align-items: end;
+    margin-bottom: 18px;
+  }
+
+  h1 {
+    margin: 0 0 8px;
+    font-size: clamp(34px, 5vw, 58px);
+    line-height: 0.98;
+    letter-spacing: -0.03em;
+  }
+
+  .hero p,
+  .note,
+  .stat-label {
+    font-family: "Avenir Next", "Helvetica Neue", Helvetica, sans-serif;
+  }
+
+  .hero p {
+    margin: 0;
+    color: var(--muted);
+    max-width: 66ch;
+    font-size: 15px;
+    line-height: 1.5;
+  }
+
+  .note {
+    border: 1px solid rgba(31, 22, 16, 0.1);
+    border-radius: 20px;
+    padding: 16px 18px;
+    background: rgba(255, 251, 245, 0.78);
+    box-shadow: 0 16px 38px rgba(45, 28, 18, 0.08);
+    color: var(--muted);
+    font-size: 13px;
+    line-height: 1.45;
+  }
+
+  .controls {
+    display: grid;
+    grid-template-columns: 1.2fr 0.8fr 0.8fr;
+    gap: 14px;
+    margin-bottom: 18px;
+  }
+
+  .control {
+    border: 1px solid rgba(31, 22, 16, 0.1);
+    border-radius: 18px;
+    padding: 14px 16px;
+    background: rgba(255, 251, 245, 0.8);
+    box-shadow: 0 12px 28px rgba(45, 28, 18, 0.06);
+  }
+
+  .control label {
+    display: block;
+    margin-bottom: 10px;
+    font: 600 11px/1 "Avenir Next", "Helvetica Neue", Helvetica, sans-serif;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  input[type="range"],
+  select {
+    width: 100%;
+  }
+
+  .stats {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 12px;
+    margin-bottom: 18px;
+  }
+
+  .stat {
+    border-radius: 16px;
+    border: 1px solid rgba(31, 22, 16, 0.08);
+    padding: 12px;
+    background: rgba(255, 249, 241, 0.74);
+  }
+
+  .stat-value {
+    font-size: 24px;
+    line-height: 1;
+  }
+
+  .stat-label {
+    margin-top: 6px;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .spread {
+    border: 1px solid rgba(31, 22, 16, 0.1);
+    border-radius: 28px;
+    padding: 18px;
+    background:
+      linear-gradient(180deg, rgba(255,255,255,0.45), rgba(255,250,242,0.9)),
+      repeating-linear-gradient(
+        to bottom,
+        transparent 0,
+        transparent 31px,
+        var(--grid) 31px,
+        var(--grid) 32px
+      );
+    box-shadow: 0 22px 48px rgba(46, 30, 18, 0.08);
+  }
+
+  .spread-inner {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 22px;
+  }
+
+  .column {
+    position: relative;
+    border-radius: 20px;
+    min-height: 720px;
+    padding: 18px 18px 20px;
+    background: rgba(255, 252, 247, 0.78);
+    border: 1px solid rgba(31, 22, 16, 0.08);
+    overflow: hidden;
+  }
+
+  .column-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 12px;
+    font-family: "Avenir Next", "Helvetica Neue", Helvetica, sans-serif;
+  }
+
+  .column-head strong {
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+
+  .column-head span {
+    font-size: 12px;
+    color: var(--muted);
+  }
+
+  .column-stage {
+    position: relative;
+    width: 100%;
+  }
+
+  .line {
+    position: absolute;
+    left: 0;
+    white-space: pre;
+    font: 20px/32px "Iowan Old Style", "Palatino Linotype", "Book Antiqua", Palatino, serif;
+  }
+
+  .spill {
+    margin-top: 14px;
+    padding: 12px 14px;
+    border-radius: 16px;
+    border: 1px solid rgba(151, 79, 41, 0.16);
+    background: rgba(151, 79, 41, 0.08);
+    color: #5d341c;
+    font: 13px/1.45 "Avenir Next", "Helvetica Neue", Helvetica, sans-serif;
+  }
+
+  @media (max-width: 1040px) {
+    .hero,
+    .controls,
+    .stats,
+    .spread-inner {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
+</head>
+<body>
+<main>
+  <section class="hero">
+    <div>
+      <h1>Userland columns, not browser columns.</h1>
+      <p>
+        This spread uses a single `layoutWithLines()` call, then repartitions the
+        resulting lines into three columns in userland. Resize the spread and the
+        article reflows without asking the browser to decide where the columns break.
+      </p>
+    </div>
+    <div class="note">
+      The point is not to replace every CSS text primitive. The point is that once
+      lines are explicit, higher-level editorial layout stops being a one-way trip
+      into block layout. This is the sort of thing that becomes tractable once the
+      line model is ours.
+    </div>
+  </section>
+
+  <section class="controls">
+    <div class="control">
+      <label for="spread-width">Spread width</label>
+      <input id="spread-width" type="range" min="720" max="1320" value="1080">
+    </div>
+    <div class="control">
+      <label for="excerpt">Excerpt</label>
+      <select id="excerpt">
+        <option value="gatsby">The Great Gatsby</option>
+        <option value="mixed">Mixed app text</option>
+      </select>
+    </div>
+    <div class="control">
+      <label for="target-lines">Lines per column</label>
+      <input id="target-lines" type="range" min="16" max="34" value="24">
+    </div>
+  </section>
+
+  <section class="stats">
+    <div class="stat">
+      <div class="stat-value" id="stat-spread-width">1080px</div>
+      <div class="stat-label">Spread width</div>
+    </div>
+    <div class="stat">
+      <div class="stat-value" id="stat-column-width">0px</div>
+      <div class="stat-label">Column width</div>
+    </div>
+    <div class="stat">
+      <div class="stat-value" id="stat-line-count">0</div>
+      <div class="stat-label">Total lines</div>
+    </div>
+    <div class="stat">
+      <div class="stat-value" id="stat-overflow">0</div>
+      <div class="stat-label">Overflow lines</div>
+    </div>
+  </section>
+
+  <section class="spread" id="spread">
+    <div class="spread-inner">
+      <article class="column">
+        <div class="column-head"><strong>Column 1</strong><span id="col1-meta">0 lines</span></div>
+        <div class="column-stage" id="col1-stage"></div>
+      </article>
+      <article class="column">
+        <div class="column-head"><strong>Column 2</strong><span id="col2-meta">0 lines</span></div>
+        <div class="column-stage" id="col2-stage"></div>
+      </article>
+      <article class="column">
+        <div class="column-head"><strong>Column 3</strong><span id="col3-meta">0 lines</span></div>
+        <div class="column-stage" id="col3-stage"></div>
+      </article>
+    </div>
+    <div class="spill" id="spill">
+      No overflow. All current lines fit inside the three-column spread.
+    </div>
+  </section>
+</main>
+<script type="module" src="./columns.ts"></script>
+</body>
+</html>
