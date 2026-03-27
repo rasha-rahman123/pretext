@@ -6,7 +6,17 @@ Pretext side-steps the need for DOM measurements (e.g. `getBoundingClientRect`, 
 
 ## Installation
 
-Still private for now. Clone the repo and run `bun install`.
+```sh
+npm install @chenglou/pretext
+```
+
+## Demos
+
+Clone the repo, run `bun install`, then `bun start`, and open one of the `/demos/...` routes in your browser.
+
+- `pages/demos/bubbles.*`: message bubble shrinkwrap. Shows off `walkLineRanges()` for finding the tightest multiline width.
+- `pages/demos/dynamic-layout.*`: fixed-height editorial spread with logos as obstacles. Shows off `layoutNextLine()` and manual line routing.
+- `pages/demos/masonry/*`: virtualization / occlusion demo with many text cards. Shows off `prepare()` + `layout()` as a DOM-free height engine.
 
 ## API
 
@@ -15,7 +25,7 @@ Pretext serves 2 use cases:
 ### 1. Measure a paragraph's height _without ever touching DOM_
 
 ```ts
-import { prepare, layout } from './src/layout.ts'
+import { prepare, layout } from '@chenglou/pretext'
 
 const prepared = prepare('AGI 春天到了. بدأت الرحلة 🚀', '16px Inter')
 const { height, lineCount } = layout(prepared, textWidth, 20) // pure arithmetics. No DOM layout & reflow!
@@ -42,7 +52,7 @@ Switch out `prepare` with `prepareWithSegments`, then:
 - `layoutWithLines()` gives you all the lines at a fixed width:
 
 ```ts
-import { prepareWithSegments, layoutWithLines } from './src/layout.ts'
+import { prepareWithSegments, layoutWithLines } from '@chenglou/pretext'
 
 const prepared = prepareWithSegments('AGI 春天到了. بدأت الرحلة 🚀', '18px "Helvetica Neue"')
 const { lines } = layoutWithLines(prepared, 320, 26) // 320px max width, 26px line height
