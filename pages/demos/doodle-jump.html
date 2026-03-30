@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<title>Doodle Jump — Pretext Demo</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    color-scheme: dark;
+  }
+  body {
+    min-height: 100dvh;
+    background: #0d1b2a;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    color: #e0e0e0;
+    padding: 20px 16px 32px;
+    gap: 16px;
+  }
+  .header {
+    text-align: center;
+  }
+  .eyebrow {
+    font: 11px/1.2 "SF Mono", ui-monospace, monospace;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+    color: #4caf50;
+    margin-bottom: 6px;
+  }
+  h1 {
+    font: 700 26px/1.1 Georgia, "Times New Roman", serif;
+    color: #e8f5e9;
+    margin-bottom: 6px;
+  }
+  .desc {
+    font-size: 13px;
+    color: #78909c;
+    max-width: 360px;
+    line-height: 1.5;
+  }
+  canvas {
+    border-radius: 16px;
+    box-shadow: 0 24px 60px rgba(0,0,0,0.7), 0 0 0 2px rgba(76,175,80,0.3);
+    touch-action: none;
+    max-width: 100%;
+    cursor: pointer;
+  }
+  .controls {
+    font: 12px/1.5 "SF Mono", ui-monospace, monospace;
+    color: #546e7a;
+    text-align: center;
+  }
+  .controls strong {
+    color: #80cbc4;
+  }
+  .back {
+    margin-top: 4px;
+    font: 12px/1.2 "Helvetica Neue", Helvetica, Arial, sans-serif;
+    color: #546e7a;
+    text-decoration: none;
+  }
+  .back:hover { color: #80cbc4; }
+</style>
+</head>
+<body>
+  <div class="header">
+    <p class="eyebrow">Pretext Demo</p>
+    <h1>🐸 Doodle Jump</h1>
+    <p class="desc">
+      A Doodle Jump–style platformer rendered entirely on canvas.
+      Score labels and UI text are measured with <code>prepare()</code> +
+      <code>layout()</code> from Pretext.
+    </p>
+  </div>
+
+  <canvas id="game-canvas" width="360" height="600"></canvas>
+
+  <div class="controls">
+    <strong>← →</strong> or <strong>A D</strong> to move &nbsp;·&nbsp;
+    <strong>Space / Enter</strong> to start<br>
+    Tap the canvas on mobile
+  </div>
+
+  <a class="back" href="/demos/">← Back to demos</a>
+
+  <script type="module" src="./doodle-jump.ts"></script>
+</body>
+</html>
